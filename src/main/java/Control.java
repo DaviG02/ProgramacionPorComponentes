@@ -33,10 +33,11 @@ public class Control extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            out.println("<body style=\"background-color:cadetblue;\">\n" +"</body>");
             out.println("<title>Servlet Control</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Control at " + request.getContextPath() + "</h1>");
+            out.println("<h1><B>Servlet Control at " + request.getContextPath() + "</B></h1>");
             out.println("</body>");
             out.println("</html>");
         }
