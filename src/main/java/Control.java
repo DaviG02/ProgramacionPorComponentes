@@ -56,8 +56,9 @@ public class Control extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
-       String n=request.getParameter("txt_Nombre");
-        String a=request.getParameter("txt_Apellidos");
+        String nombre=request.getParameter("txt_Nombre");
+        String numero=request.getParameter("txt_Numero");
+        String Correo=request.getParameter("txt_Correo");
        response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -66,9 +67,10 @@ public class Control extends HttpServlet {
             out.println("<head>");
             out.println("<title>RESPUESTA1</title>");            
             out.println("</head>");
+            out.println("<body style=\"background-color:cadetblue;\">\n" +"</body>");
             out.println("<body>");
-             out.println("<h1>El domicilio que llego: "+n+" "+a+"</h1>");
-            out.println("<h1>Esta es una respuesta desde el servelet control</h1>");
+            out.println("<h1>La persona que llego es: "+nombre+"---"+numero+"---"+Correo+" "+"</h1>");
+            out.println("<h1>Esta es la respuesta desde el servelet control</h1>");
             out.println("</body>");
             out.println("</html>");
         }
