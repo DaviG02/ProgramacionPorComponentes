@@ -26,8 +26,6 @@ body{
 }
 
 .container-page{ 
-    height: vh;
-    width: 20vw;
     border-radius: 20px;
     display: flex;
     justify-content: center;

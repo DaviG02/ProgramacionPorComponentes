@@ -5,6 +5,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +60,9 @@ public class Control extends HttpServlet {
         String nombre=request.getParameter("txt_Nombre");
         String numero=request.getParameter("txt_Numero");
         String Correo=request.getParameter("txt_Correo");
-       response.setContentType("text/html;charset=UTF-8");
+        String Clave=request.getParameter("txt_Clave");
+        PersonaInf persona=new PersonaInf(nombre,numero,Correo,Clave);
+        response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -69,10 +72,15 @@ public class Control extends HttpServlet {
             out.println("</head>");
             out.println("<body style=\"background-color:cadetblue;\">\n" +"</body>");
             out.println("<body>");
-            out.println("<h1>La persona que llego es: "+nombre+"---"+numero+"---"+Correo+" "+"</h1>");
+            out.println("<h1>La persona que llego es: "+nombre+"---"+numero+"---"+Correo+" "+"---"+Clave+" "+"</h1>");
             out.println("<h1>Esta es la respuesta desde el servelet control</h1>");
             out.println("</body>");
             out.println("</html>");
+        }
+        PersonaDAO Dao=new PersonaDAO();
+        List<PersonaInf>lista=Dao.realAll();
+        for(PersonaInf i : lista){
+            System.out.println(i.toString());
         }
     }
 
