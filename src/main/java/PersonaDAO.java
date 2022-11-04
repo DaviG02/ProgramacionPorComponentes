@@ -6,6 +6,7 @@
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -30,10 +31,10 @@ public class PersonaDAO {
             lista = new ArrayList<>();
             while (rs.next()) {
                 PersonaInf obj = new PersonaInf(
-                        rs.getString("Nombre"),
-                        rs.getString("Telf"),
-                        rs.getString("Email"),
-                        rs.getString("Clave"));
+                        rs.getString("nombre"),
+                        rs.getString("telefono"),
+                        rs.getString("correo"),
+                        rs.getString("clave"));
                 lista.add(obj);
             }
         } catch (SQLException ex) {
@@ -41,4 +42,23 @@ public class PersonaDAO {
         }
         return lista; 
     } 
+    
+    public boolean insertar(PersonaInf objetv) {
+        boolean verificar=false;
+        String sql = "INSERT INTO tb_persona (nombre, telefono, correo, clave) VALUES('" + objetv.getNombre()
+                + "','" + objetv.getTelf()+ "','" + objetv.getEmail() + "','" + objetv.getClave() + "')";     
+        try {
+            Statement ps;
+            ps = con.getConexion().createStatement();
+            ps.executeUpdate(sql);           
+            verificar=true;       
+        } catch (SQLException ex) {
+            System.out.println("Error al conectar: " + ex);
+           verificar=false;
+        }
+       return verificar;
+    }
+
+    
+    
 }
