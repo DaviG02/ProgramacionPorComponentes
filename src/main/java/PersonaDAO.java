@@ -43,6 +43,29 @@ public class PersonaDAO {
         return lista; 
     } 
     
+    public PersonaInf verificar(String correo, String clave){
+    PersonaInf ObjPer=new PersonaInf();
+    String sql = "SELECT * FROM tb_persona WHERE correo='" + correo + "' AND clave='" + clave + "'";
+    PreparedStatement ps;
+    
+        try {
+            ps=con.getConexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                    if(rs.getString("correo").equals(correo) && rs.getString("clave").equals(clave)){
+                      ObjPer.setNombre(rs.getString("nombre"));
+                      ObjPer.setTelf(rs.getString("telefono"));
+                      ObjPer.setEmail(rs.getString("correo"));
+                      ObjPer.setClave(rs.getString("clave"));
+                    }
+            }
+        } catch (Exception e) {
+            System.out.println("No se logro conectar al verificar");
+        }
+    return ObjPer;
+    }
+    
+    
     public boolean insertar(PersonaInf objetv) {
         boolean verificar=false;
         String sql = "INSERT INTO tb_persona (nombre, telefono, correo, clave) VALUES('" + objetv.getNombre()
@@ -58,7 +81,5 @@ public class PersonaDAO {
         }
        return verificar;
     }
-
-    
     
 }

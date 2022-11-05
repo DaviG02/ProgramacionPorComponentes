@@ -58,6 +58,23 @@ public class Control extends HttpServlet {
             throws ServletException, IOException {
         
        // processRequest(request, response);
+    String action=(String) request.getParameter("action");
+       
+    if (action.equals("Ingresar")){
+        String correo = request.getParameter("txt_Correo");
+        String clave = request.getParameter("txt_Clave");
+        PersonaInf ObjPer=new PersonaDAO().verificar(correo, clave);
+        
+        if (ObjPer.getClave().equals(clave)) {
+                request.getRequestDispatcher("Inicio.jsp").forward(request, response);
+            }else {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+    }   
+    
+    
+    if (action.equals("Registrar")){
+        
         String nombre=request.getParameter("txt_Nombre");
         String numero=request.getParameter("txt_Numero");
         String Correo=request.getParameter("txt_Correo");
@@ -66,27 +83,29 @@ public class Control extends HttpServlet {
         PersonaInf persona=new PersonaInf(nombre,numero,Correo,Clave);
         PersonaDAO hi=new PersonaDAO();
         hi.insertar(persona);
-        
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+    }     
+
+       // response.setContentType("text/html;charset=UTF-8");
+       // try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>RESPUESTA1</title>");            
-            out.println("</head>");
-            out.println("<body style=\"background-color:yellow;\">\n" +"</body>");
-            out.println("<body>");
-            out.println("<h1>La persona que llego es: "+nombre+"---"+numero+"---"+Correo+" "+"---"+Clave+" "+"</h1>");
-            out.println("<h1>Esta es la respuesta desde el servelet control</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-        PersonaDAO Dao=new PersonaDAO();
-        List<PersonaInf>lista=Dao.realAll();
-        for(PersonaInf i : lista){
-            System.out.println(i.toString());
-        }
+        //    out.println("<!DOCTYPE html>");
+        //   out.println("<html>");
+        //    out.println("<head>");
+        //    out.println("<title>RESPUESTA1</title>");            
+        //   out.println("</head>");
+        //   out.println("<body style=\"background-color:yellow;\">\n" +"</body>");
+        //    out.println("<body>");
+        //    out.println("<h1>La persona que llego es: "+nombre+"---"+numero+"---"+Correo+" "+"---"+Clave+" "+"</h1>");
+        //    out.println("<h1>Esta es la respuesta desde el servelet control</h1>");
+        //    out.println("</body>");
+        //    out.println("</html>");
+        //}
+        //PersonaDAO Dao=new PersonaDAO();
+        //List<PersonaInf>lista=Dao.realAll();
+        //for(PersonaInf i : lista){
+        //    System.out.println(i.toString());
+        //}
+        
     }
 
     /**
