@@ -83,6 +83,7 @@ public class Control extends HttpServlet {
         PersonaInf persona=new PersonaInf(nombre,numero,Correo,Clave);
         PersonaDAO hi=new PersonaDAO();
         hi.insertar(persona);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }     
 
        // response.setContentType("text/html;charset=UTF-8");
